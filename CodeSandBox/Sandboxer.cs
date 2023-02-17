@@ -15,17 +15,9 @@ namespace CodeSandBox
 {
     class Sandboxer : MarshalByRefObject
     {
-        ////const string pathToUntrusted = @"..\..\..\UntrustedCode\bin\Debug";
-        //dynamic untrustedAssembly = "ConsoleApp1";
-        //const string untrustedClass = "ConsoleApp1.UntrustedClass";
-        //const string entryPoint = "IsFibonacci";
-        //private static Object[] parameters = { 45 };
-
-        // string untrustedCodeFilePath;
-
-
+     
         public void executeSandboxer(string selectedUntrustedfilePath, string untrustedAssembly, string untrustedClass,
-                                                        string entryPoint, Object[] parameters, PermissionSet permissionSet)
+                                                        string entryPoint, PermissionSet permissionSet, params Object[] parameters)
         // public void executeSandboxer(string selectedUntrustedfilePath)
 
         {
@@ -65,20 +57,9 @@ namespace CodeSandBox
             newDomainInstance.ExecuteUntrustedCode(untrustedAssembly, untrustedClass, entryPoint, untrustedCodeFilePath, parameters);
 
 
-
-            //var permssionSet = LoadPermissions();
-
-            //if(permssionSet.Count > 0)
-            //{
-            //    foreach(var permisison in permssionSet)
-            //    {
-            //        checkBox1.Text = permisison.ToString();
-            //        checkBox1.Name = permisison.ToString();
-            //    }
-            //}
         }
 
-        public void ExecuteUntrustedCode(string assemblyName, string typeName, string entryPoint, string untrustedCodeFilePath, Object[] parameters)
+        public void ExecuteUntrustedCode(string assemblyName, string typeName, string entryPoint, string untrustedCodeFilePath, params Object[] parameters)
         {
             //Load the MethodInfo for a method in the new Assembly. This might be a method you know, or
             //you can use Assembly.EntryPoint to get to the main function in an executable.
@@ -88,10 +69,26 @@ namespace CodeSandBox
 
             try
             {
-                MethodInfo target = Assembly.LoadFrom(untrustedCodeFilePath).GetType(typeName).GetMethod(entryPoint);
+                
+                //MethodInfo target = Assembly.LoadFrom(untrustedCodeFilePath).GetType(typeName).GetMethod(entryPoint);
+                
+                //Loads the Assembly from the File Path and get the Type(Class) using Reflection
+                var target = Assembly.LoadFrom(untrustedCodeFilePath).GetType(typeName);
+                
+                if(parameters != null)
+                {
+                    //Now invoke the method.
+                    // bool retVal = (bool)target.Invoke(null, parameters);
 
-                //Now invoke the method.
-                bool retVal = (bool)target.Invoke(null, parameters);
+                    //This invokes a method(entry point with argument)
+                    target.GetMethod(entryPoint).Invoke(null, parameters);
+                }
+                else
+                {
+                    //This will invoke entry points (methods) that are parameterless, public and static
+                    target.GetMethod(entryPoint, BindingFlags.Public | BindingFlags.Static).Invoke(null, null);
+                }
+
             }
             catch (Exception ex)
             {
@@ -100,7 +97,7 @@ namespace CodeSandBox
                 new PermissionSet(PermissionState.Unrestricted).Assert();
                 Console.WriteLine("SecurityException caught:\n{0}", ex.ToString());
 
-                MessageBox.Show(string.Format("{0} Permission Required!", ex.Message.ToString()));
+                MessageBox.Show(string.Format("{0}", ex.Message.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error));
 
                 CodeAccessPermission.RevertAssert();
                 Console.ReadLine();

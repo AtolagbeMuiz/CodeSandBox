@@ -105,8 +105,11 @@ namespace CodeSandBox
         {
             try
             {
+                Object[] parames = null;
+
                 PermissionSet permissionSet = new PermissionSet(PermissionState.None);
                 permissionSet.AddPermission(new EnvironmentPermission((PermissionState)EnvironmentPermissionAccess.Read));
+               // permissionSet.AddPermission(new EnvironmentPermission((PermissionState)EnvironmentPermissionAccess.Write));
 
                 if (executionAccesscheckBox.Checked)
                 {
@@ -119,19 +122,36 @@ namespace CodeSandBox
                 }
                 if (writeAccesscheckBox.Checked)
                 {
-                    permissionSet.AddPermission(new FileIOPermission((PermissionState)FileIOPermissionAccess.Write));
+                    permissionSet.AddPermission(new FileIOPermission((PermissionState)FileIOPermissionAccess.AllAccess));
 
                 }
                 Sandboxer sb = new Sandboxer();
 
-                var parames = new Object[] { Convert.ToInt32(parameters) };
+                if(!String.IsNullOrEmpty(parameters))
+                {
+                    //parames = new Object[] { Convert.ToInt32(parameters) };
+                    int parsedResult;
+                    bool doubleResultTryParse = int.TryParse(parameters, out parsedResult);
+                    if(doubleResultTryParse == true)
+                    {
+                        parames = new Object[] { parsedResult };
 
-                sb.executeSandboxer(selectedfilePath, untrustedAssembly, untrustedClass, entryPoint, parames, permissionSet);
+                    }
+                    else
+                    {
+                        parames = new Object[] { parameters };
+
+                    }
+
+                }
+
+                sb.executeSandboxer(selectedfilePath, untrustedAssembly, untrustedClass, entryPoint, permissionSet, parames);
                 // sb.executeSandboxer(selectedfilePath);
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                MessageBox.Show(string.Format("{0}", ex.Message.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error));
 
                 throw;
             }
