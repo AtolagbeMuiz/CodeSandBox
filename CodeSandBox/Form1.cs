@@ -22,8 +22,19 @@ namespace CodeSandBox
 
             executeButton.Click += delegate (object sender, EventArgs e)
             {
-                executeButton_Click(sender, e, filePathTextBox.Text,
-                untrustedAssemblyTxt.Text, untrustedClassTxt.Text, entryPointTxt.Text, parameterTxt.Text);
+                //validates the inputs
+                if(string.IsNullOrEmpty(filePathTextBox.Text) || string.IsNullOrEmpty(untrustedAssemblyTxt.Text) 
+                        || string.IsNullOrEmpty(untrustedClassTxt.Text) || string.IsNullOrEmpty(entryPointTxt.Text))
+                {
+                    errorLbl.Text = "All Inputs with * are required";
+                    errorLbl.Show();
+                }
+                else
+                {
+                    executeButton_Click(sender, e, filePathTextBox.Text,
+                    untrustedAssemblyTxt.Text, untrustedClassTxt.Text, entryPointTxt.Text, parameterTxt.Text);
+                }
+                
             };
 
             //executeButton.Click += delegate (object sender, EventArgs e) { executeButton_Click(sender, e, filePathTextBox.Text); };
@@ -75,33 +86,8 @@ namespace CodeSandBox
            
         }
 
-        //public PermissionSet LoadPermissions()
-        //{
-        //    try
-        //    {
-
-        //        PermissionSet permissionSet = new PermissionSet(PermissionState.None);
-        //        //PermissionSet permissionSet = null;
-        //        permissionSet.AddPermission(new SecurityPermission(SecurityPermissionFlag.Execution));
-        //        permissionSet.AddPermission(new FileIOPermission((PermissionState)FileIOPermissionAccess.Read));
-        //        permissionSet.AddPermission(new EnvironmentPermission((PermissionState)EnvironmentPermissionAccess.Read));
-
-        //        return permissionSet;
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //        throw;
-        //    }
-        //}
-
-
-
         private void executeButton_Click(object sender, EventArgs e, string selectedfilePath,
                             string untrustedAssembly, string untrustedClass, string entryPoint, string parameters)
-
-        // private void executeButton_Click(object sender, EventArgs e, string selectedfilePath)
-
         {
             try
             {
@@ -122,7 +108,7 @@ namespace CodeSandBox
                 }
                 if (writeAccesscheckBox.Checked)
                 {
-                    permissionSet.AddPermission(new FileIOPermission((PermissionState)FileIOPermissionAccess.AllAccess));
+                    permissionSet.AddPermission(new FileIOPermission(FileIOPermissionAccess.Write, "C:\\Temp\\file.txt"));
 
                 }
                 Sandboxer sb = new Sandboxer();
@@ -157,6 +143,5 @@ namespace CodeSandBox
             }
         }
 
-       
     }
 }

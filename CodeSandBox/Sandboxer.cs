@@ -32,12 +32,7 @@ namespace CodeSandBox
             //We want the sandboxer assembly's strong name, so that we can add it to the full trust list.
             StrongName fullTrustAssembly = typeof(Sandboxer).Assembly.Evidence.GetHostEvidence<StrongName>();
 
-            //PermissionSet permissionSet = new PermissionSet(PermissionState.None);
-            ////permissionSet.AddPermission(new SecurityPermission(SecurityPermissionFlag.Execution));
-            //permissionSet.AddPermission(new FileIOPermission((PermissionState)FileIOPermissionAccess.Read));
-            //permissionSet.AddPermission(new EnvironmentPermission((PermissionState)EnvironmentPermissionAccess.Read));
-
-
+            
             //Now we have everything we need to create the AppDomain, so let's create it.
             AppDomain newDomain = AppDomain.CreateDomain("CodeSandBox", null, adSetup, permissionSet, fullTrustAssembly);
 

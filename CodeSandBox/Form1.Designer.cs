@@ -45,6 +45,12 @@ namespace CodeSandBox
             this.parameterTxt = new System.Windows.Forms.TextBox();
             this.writeAccesscheckBox = new System.Windows.Forms.CheckBox();
             this.executionAccesscheckBox = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.errorLbl = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // filePathTextBox
@@ -57,7 +63,7 @@ namespace CodeSandBox
             // filePathLabel
             // 
             this.filePathLabel.AutoSize = true;
-            this.filePathLabel.Location = new System.Drawing.Point(90, 28);
+            this.filePathLabel.Location = new System.Drawing.Point(80, 25);
             this.filePathLabel.Name = "filePathLabel";
             this.filePathLabel.Size = new System.Drawing.Size(48, 13);
             this.filePathLabel.TabIndex = 1;
@@ -102,7 +108,7 @@ namespace CodeSandBox
             // untrustedAssmblyLbl
             // 
             this.untrustedAssmblyLbl.AutoSize = true;
-            this.untrustedAssmblyLbl.Location = new System.Drawing.Point(44, 70);
+            this.untrustedAssmblyLbl.Location = new System.Drawing.Point(28, 65);
             this.untrustedAssmblyLbl.Name = "untrustedAssmblyLbl";
             this.untrustedAssmblyLbl.Size = new System.Drawing.Size(100, 13);
             this.untrustedAssmblyLbl.TabIndex = 6;
@@ -110,7 +116,7 @@ namespace CodeSandBox
             // 
             // executeButton
             // 
-            this.executeButton.Location = new System.Drawing.Point(165, 355);
+            this.executeButton.Location = new System.Drawing.Point(179, 310);
             this.executeButton.Name = "executeButton";
             this.executeButton.Size = new System.Drawing.Size(282, 32);
             this.executeButton.TabIndex = 7;
@@ -120,7 +126,7 @@ namespace CodeSandBox
             // untrustedClassLbl
             // 
             this.untrustedClassLbl.AutoSize = true;
-            this.untrustedClassLbl.Location = new System.Drawing.Point(55, 104);
+            this.untrustedClassLbl.Location = new System.Drawing.Point(41, 104);
             this.untrustedClassLbl.Name = "untrustedClassLbl";
             this.untrustedClassLbl.Size = new System.Drawing.Size(81, 13);
             this.untrustedClassLbl.TabIndex = 8;
@@ -160,7 +166,7 @@ namespace CodeSandBox
             // 
             // parameterTxt
             // 
-            this.parameterTxt.Location = new System.Drawing.Point(150, 176);
+            this.parameterTxt.Location = new System.Drawing.Point(150, 192);
             this.parameterTxt.Name = "parameterTxt";
             this.parameterTxt.Size = new System.Drawing.Size(311, 20);
             this.parameterTxt.TabIndex = 13;
@@ -185,11 +191,81 @@ namespace CodeSandBox
             this.executionAccesscheckBox.Text = "Execution Access";
             this.executionAccesscheckBox.UseVisualStyleBackColor = true;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.Black;
+            this.label2.Location = new System.Drawing.Point(147, 176);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(161, 13);
+            this.label2.TabIndex = 16;
+            this.label2.Text = "(Parameter is not a required field)";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Red;
+            this.label3.Location = new System.Drawing.Point(128, 20);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(16, 20);
+            this.label3.TabIndex = 17;
+            this.label3.Text = "*";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Red;
+            this.label4.Location = new System.Drawing.Point(128, 65);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(16, 20);
+            this.label4.TabIndex = 18;
+            this.label4.Text = "*";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.Red;
+            this.label5.Location = new System.Drawing.Point(128, 102);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(16, 20);
+            this.label5.TabIndex = 19;
+            this.label5.Text = "*";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.Red;
+            this.label6.Location = new System.Drawing.Point(128, 142);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(16, 20);
+            this.label6.TabIndex = 20;
+            this.label6.Text = "*";
+            // 
+            // errorLbl
+            // 
+            this.errorLbl.AutoSize = true;
+            this.errorLbl.Location = new System.Drawing.Point(55, 285);
+            this.errorLbl.Name = "errorLbl";
+            this.errorLbl.Size = new System.Drawing.Size(0, 13);
+            this.errorLbl.TabIndex = 21;
+            this.errorLbl.Visible = false;
+            this.errorLbl.ForeColor = System.Drawing.Color.Red;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.errorLbl);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.executionAccesscheckBox);
             this.Controls.Add(this.writeAccesscheckBox);
             this.Controls.Add(this.parameterTxt);
@@ -232,6 +308,12 @@ namespace CodeSandBox
         private System.Windows.Forms.TextBox parameterTxt;
         private System.Windows.Forms.CheckBox writeAccesscheckBox;
         private System.Windows.Forms.CheckBox executionAccesscheckBox;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label errorLbl;
     }
 }
 
