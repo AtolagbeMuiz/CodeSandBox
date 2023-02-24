@@ -37,8 +37,6 @@ namespace CodeSandBox
                 
             };
 
-            //executeButton.Click += delegate (object sender, EventArgs e) { executeButton_Click(sender, e, filePathTextBox.Text); };
-
 
         }
 
@@ -54,7 +52,7 @@ namespace CodeSandBox
                 //creante an instance of the OpenFileDialog
                 OpenFileDialog dialog = new OpenFileDialog();
 
-                dialog.Filter = "exe files (*.exe)|*.exe* |dll files (*.dll)|*.dll* |All files (*.*)|*.*";
+                dialog.Filter = "exe files (*.exe)|*.exe|All files (*.*)|*.*";
                 dialog.InitialDirectory = @"C:\";
                 string folderPath = dialog.InitialDirectory;
                 dialog.Title = "Browse For Assembly Files";
@@ -95,7 +93,10 @@ namespace CodeSandBox
 
                 PermissionSet permissionSet = new PermissionSet(PermissionState.None);
                 permissionSet.AddPermission(new EnvironmentPermission((PermissionState)EnvironmentPermissionAccess.Read));
-               // permissionSet.AddPermission(new EnvironmentPermission((PermissionState)EnvironmentPermissionAccess.Write));
+
+                permissionSet.AddPermission(new UIPermission(UIPermissionWindow.AllWindows));
+
+                // permissionSet.AddPermission(new EnvironmentPermission((PermissionState)EnvironmentPermissionAccess.Write));
 
                 if (executionAccesscheckBox.Checked)
                 {
@@ -132,7 +133,6 @@ namespace CodeSandBox
                 }
 
                 sb.executeSandboxer(selectedfilePath, untrustedAssembly, untrustedClass, entryPoint, permissionSet, parames);
-                // sb.executeSandboxer(selectedfilePath);
 
             }
             catch (Exception ex)

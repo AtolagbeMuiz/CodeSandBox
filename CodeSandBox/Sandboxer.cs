@@ -81,7 +81,12 @@ namespace CodeSandBox
                 else
                 {
                     //This will invoke entry points (methods) that are parameterless, public and static
+                    
+                    //new PermissionSet(PermissionState.Unrestricted).Assert();
+
                     target.GetMethod(entryPoint, BindingFlags.Public | BindingFlags.Static).Invoke(null, null);
+
+                    // CodeAccessPermission.RevertAssert();
                 }
 
             }
