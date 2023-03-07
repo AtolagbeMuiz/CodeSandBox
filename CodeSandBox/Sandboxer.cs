@@ -18,8 +18,7 @@ namespace CodeSandBox
      
         public void executeSandboxer(string selectedUntrustedfilePath, string untrustedAssembly, string untrustedClass,
                                                         string entryPoint, PermissionSet permissionSet, params Object[] parameters)
-        // public void executeSandboxer(string selectedUntrustedfilePath)
-
+      
         {
 
             //Setting the AppDomainSetup. It is very important to set the ApplicationBase to a folder
@@ -44,6 +43,7 @@ namespace CodeSandBox
                 newDomain, typeof(Sandboxer).Assembly.ManifestModule.FullyQualifiedName,
                 typeof(Sandboxer).FullName
                 );
+
             //Unwrap the new domain instance into a reference in this domain and use it to execute the
             //untrusted code.
             Sandboxer newDomainInstance = (Sandboxer)handle.Unwrap();
@@ -56,37 +56,25 @@ namespace CodeSandBox
 
         public void ExecuteUntrustedCode(string assemblyName, string typeName, string entryPoint, string untrustedCodeFilePath, params Object[] parameters)
         {
-            //Load the MethodInfo for a method in the new Assembly. This might be a method you know, or
-            //you can use Assembly.EntryPoint to get to the main function in an executable.
-            //Type[] test = Assembly.Load(assemblyName).GetTypes();
-
-            //MethodInfo target = Assembly.Load(assemblyName).GetType(typeName).GetMethod(entryPoint);
-
+            
             try
             {
-                
-                //MethodInfo target = Assembly.LoadFrom(untrustedCodeFilePath).GetType(typeName).GetMethod(entryPoint);
                 
                 //Loads the Assembly from the File Path and get the Type(Class) using Reflection
                 var target = Assembly.LoadFrom(untrustedCodeFilePath).GetType(typeName);
                 
+                //checks if the entry point method requires argument to determine type of method invoke
                 if(parameters != null)
                 {
                     //Now invoke the method.
-                    // bool retVal = (bool)target.Invoke(null, parameters);
-
                     //This invokes a method(entry point with argument)
                     target.GetMethod(entryPoint).Invoke(null, parameters);
                 }
                 else
                 {
-                    //This will invoke entry points (methods) that are parameterless, public and static
-                    
-                    //new PermissionSet(PermissionState.Unrestricted).Assert();
-
+                    //This will invoke entry points (methods) that are parameterless, public and static             
                     target.GetMethod(entryPoint, BindingFlags.Public | BindingFlags.Static).Invoke(null, null);
 
-                    // CodeAccessPermission.RevertAssert();
                 }
 
             }

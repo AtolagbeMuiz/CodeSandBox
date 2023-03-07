@@ -51,6 +51,8 @@ namespace CodeSandBox
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.errorLbl = new System.Windows.Forms.Label();
+            this.UIAccessCheckBox = new System.Windows.Forms.CheckBox();
+            this.webPermissionCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // filePathTextBox
@@ -81,7 +83,7 @@ namespace CodeSandBox
             // readAccesscheckBox
             // 
             this.readAccesscheckBox.AutoSize = true;
-            this.readAccesscheckBox.Location = new System.Drawing.Point(132, 237);
+            this.readAccesscheckBox.Location = new System.Drawing.Point(83, 247);
             this.readAccesscheckBox.Name = "readAccesscheckBox";
             this.readAccesscheckBox.Size = new System.Drawing.Size(90, 17);
             this.readAccesscheckBox.TabIndex = 3;
@@ -174,7 +176,7 @@ namespace CodeSandBox
             // writeAccesscheckBox
             // 
             this.writeAccesscheckBox.AutoSize = true;
-            this.writeAccesscheckBox.Location = new System.Drawing.Point(243, 237);
+            this.writeAccesscheckBox.Location = new System.Drawing.Point(190, 247);
             this.writeAccesscheckBox.Name = "writeAccesscheckBox";
             this.writeAccesscheckBox.Size = new System.Drawing.Size(89, 17);
             this.writeAccesscheckBox.TabIndex = 14;
@@ -184,7 +186,7 @@ namespace CodeSandBox
             // executionAccesscheckBox
             // 
             this.executionAccesscheckBox.AutoSize = true;
-            this.executionAccesscheckBox.Location = new System.Drawing.Point(367, 237);
+            this.executionAccesscheckBox.Location = new System.Drawing.Point(285, 247);
             this.executionAccesscheckBox.Name = "executionAccesscheckBox";
             this.executionAccesscheckBox.Size = new System.Drawing.Size(111, 17);
             this.executionAccesscheckBox.TabIndex = 15;
@@ -248,18 +250,40 @@ namespace CodeSandBox
             // errorLbl
             // 
             this.errorLbl.AutoSize = true;
+            this.errorLbl.ForeColor = System.Drawing.Color.Red;
             this.errorLbl.Location = new System.Drawing.Point(55, 285);
             this.errorLbl.Name = "errorLbl";
             this.errorLbl.Size = new System.Drawing.Size(0, 13);
             this.errorLbl.TabIndex = 21;
             this.errorLbl.Visible = false;
-            this.errorLbl.ForeColor = System.Drawing.Color.Red;
+            // 
+            // UIAccessCheckBox
+            // 
+            this.UIAccessCheckBox.AutoSize = true;
+            this.UIAccessCheckBox.Location = new System.Drawing.Point(413, 247);
+            this.UIAccessCheckBox.Name = "UIAccessCheckBox";
+            this.UIAccessCheckBox.Size = new System.Drawing.Size(75, 17);
+            this.UIAccessCheckBox.TabIndex = 22;
+            this.UIAccessCheckBox.Text = "UI Access";
+            this.UIAccessCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // webPermissionCheckBox
+            // 
+            this.webPermissionCheckBox.AutoSize = true;
+            this.webPermissionCheckBox.Location = new System.Drawing.Point(494, 247);
+            this.webPermissionCheckBox.Name = "webPermissionCheckBox";
+            this.webPermissionCheckBox.Size = new System.Drawing.Size(100, 17);
+            this.webPermissionCheckBox.TabIndex = 23;
+            this.webPermissionCheckBox.Text = "Internet Access";
+            this.webPermissionCheckBox.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.webPermissionCheckBox);
+            this.Controls.Add(this.UIAccessCheckBox);
             this.Controls.Add(this.errorLbl);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -314,6 +338,8 @@ namespace CodeSandBox
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label errorLbl;
+        private System.Windows.Forms.CheckBox UIAccessCheckBox;
+        private System.Windows.Forms.CheckBox webPermissionCheckBox;
     }
 }
 

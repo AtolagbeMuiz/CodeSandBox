@@ -11,6 +11,7 @@ using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net;
 
 namespace CodeSandBox
 {
@@ -53,7 +54,7 @@ namespace CodeSandBox
                 OpenFileDialog dialog = new OpenFileDialog();
 
                 dialog.Filter = "exe files (*.exe)|*.exe|All files (*.*)|*.*";
-                dialog.InitialDirectory = @"C:\";
+                 dialog.InitialDirectory = @"C:\";
                 string folderPath = dialog.InitialDirectory;
                 dialog.Title = "Browse For Assembly Files";
 
@@ -94,10 +95,6 @@ namespace CodeSandBox
                 PermissionSet permissionSet = new PermissionSet(PermissionState.None);
                 permissionSet.AddPermission(new EnvironmentPermission((PermissionState)EnvironmentPermissionAccess.Read));
 
-                permissionSet.AddPermission(new UIPermission(UIPermissionWindow.AllWindows));
-
-                // permissionSet.AddPermission(new EnvironmentPermission((PermissionState)EnvironmentPermissionAccess.Write));
-
                 if (executionAccesscheckBox.Checked)
                 {
                     permissionSet.AddPermission(new SecurityPermission(SecurityPermissionFlag.Execution));
@@ -112,13 +109,29 @@ namespace CodeSandBox
                     permissionSet.AddPermission(new FileIOPermission(FileIOPermissionAccess.Write, "C:\\Temp\\file.txt"));
 
                 }
+                if (UIAccessCheckBox.Checked)
+                { 
+                    permissionSet.AddPermission(new FileIOPermission(PermissionState.Unrestricted));
+                    permissionSet.AddPermission(new FileDialogPermission(FileDialogPermissionAccess.OpenSave));
+                   
+                    permissionSet.AddPermission(new UIPermission(UIPermissionWindow.AllWindows));
+
+                }
+                if (webPermissionCheckBox.Checked)
+                {
+                    permissionSet.AddPermission(new WebPermission(PermissionState.Unrestricted));
+                }
+
+                //instantiate SandBoxer Class
                 Sandboxer sb = new Sandboxer();
 
                 if(!String.IsNullOrEmpty(parameters))
                 {
-                    //parames = new Object[] { Convert.ToInt32(parameters) };
                     int parsedResult;
+
+                    //TryParse entrypoint argument
                     bool doubleResultTryParse = int.TryParse(parameters, out parsedResult);
+                    
                     if(doubleResultTryParse == true)
                     {
                         parames = new Object[] { parsedResult };
